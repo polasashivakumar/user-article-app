@@ -1,0 +1,117 @@
+# User Article App 
+
+Backend service for the User Article App. This project provides authentication, article management, and comment features for `USER`, `AUTHOR`, and `ADMIN` roles.
+
+## Tech Stack
+
+- Node.js
+- Express
+- MongoDB with Mongoose
+- JWT authentication
+- bcryptjs for password hashing
+- cookie-parser and CORS for browser auth flows
+
+## Project Structure
+
+- `server.js` - Express app, middleware, database connection, and route mounting
+- `APIs/` - Route handlers for common, user, author, and admin flows
+- `models/` - Mongoose schemas for users and articles
+- `middlewares/` - Token and role protection
+- `services/` - Shared auth logic for register and login
+
+### Folder Structure
+
+```text
+blog-backend/
+├── APIs/
+│   ├── AdminAPI.js
+│   ├── AuthorAPI.js
+│   ├── CommonAPI.js
+│   └── UserApi.js
+├── middlewares/
+│   ├── checkAuthor.js
+│   └── verifyToken.js
+├── models/
+│   ├── ArticleModel.js
+│   └── UserModel.js
+├── services/
+│   └── authService.js
+├── authorreq.http
+├── userreq.http
+├── package.json
+└── server.js
+```
+
+The frontend app lives in `frontend/` with its own React + Tailwind structure.
+
+## Environment Variables
+
+Create a `.env` file in this folder with the following values:
+
+```env
+PORT=4000
+DB_URL=mongodb://127.0.0.1:27017/user-article-app
+JWT_SECRET=your_secret_key
+```
+
+## Install and Run
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Start the backend:
+
+```bash
+node server.js
+```
+
+If you want auto-reload during development, you can run the server with `nodemon server.js`.
+
+## API Overview
+
+### Common API
+
+- `POST /common-api/login` - Login for `USER`, `AUTHOR`, or `ADMIN`
+- `GET /common-api/logout` - Clear the auth cookie
+- `GET /common-api/check-auth` - Verify the current session
+- `PUT /common-api/change-password` - Update an account password
+
+### User API
+
+- `POST /user-api/users` - Register a user
+- `GET /user-api/articles` - Get all active articles
+- `GET /user-api/articles/:id` - Get a single active article
+- `PUT /user-api/articles` - Add a comment to an article
+
+### Author API
+
+- `POST /author-api/users` - Register an author
+- `POST /author-api/articles` - Create a new article
+- `GET /author-api/articles/:authorId` - Get articles for one author
+- `PUT /author-api/articles` - Edit an article
+- `PATCH /author-api/articles/:id/status` - Soft delete or restore an article
+
+### Admin API
+
+- `POST /admin-api/authenticate` - Admin login
+- `GET /admin-api/articles` - View all articles
+- `PUT /admin-api/users/:userId` - Block or unblock a user
+
+## Authentication Notes
+
+- Login sets an HTTP-only cookie named `token`.
+- Protected routes use `verifyToken()` middleware.
+- The frontend is expected to run on `http://localhost:5173`.
+
+## Data Model Notes
+
+- Articles require `author`, `title`, `category`, and `content`.
+- Comments are stored as embedded documents with `user` and `comment`.
+- Articles are soft-deleted using `isArticleActive`.
+
+## Frontend
+
+The frontend lives in the `frontend/` folder and is a Vite + React app styled with Tailwind CSS.
