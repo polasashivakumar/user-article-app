@@ -13,6 +13,8 @@ config(); // load environment variables
 // Create express application
 const app = exp();
 
+app.set("trust proxy", 1);
+
 
 // -------------------
 // CORS Middleware
