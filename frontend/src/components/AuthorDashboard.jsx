@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import axios from "axios";
 import { useAuthStore } from "../services/authService.js";
+import { API_BASE_URL } from "../services/api";
 import {
   cardClass,
   pageBackground,
@@ -44,7 +45,7 @@ function AuthorDashboard() {
 
       try {
         const response = await axios.get(
-          `http://localhost:4000/author-api/articles/${authorId}`,
+          `${API_BASE_URL}/author-api/articles/${authorId}`,
           { withCredentials: true }
         );
         setArticles(response.data.payload);

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
 import axios from "axios";
 import { useAuthStore } from "../services/authService";
+import { API_BASE_URL } from "../services/api";
 import {
   cardClass,
   pageBackground,
@@ -36,7 +37,7 @@ function ArticleDetail() {
 
       try {
         const response = await axios.get(
-          `http://localhost:4000/user-api/articles/${id}`,
+          `${API_BASE_URL}/user-api/articles/${id}`,
           { withCredentials: true }
         );
         setArticle(response.data.payload);
@@ -56,7 +57,7 @@ function ArticleDetail() {
 
     try {
       await axios.put(
-        "http://localhost:4000/user-api/articles",
+        `${API_BASE_URL}/user-api/articles`,
         {
           user: currentUser._id,
           articleId: id,
@@ -69,7 +70,7 @@ function ArticleDetail() {
 
       // Refresh article to show new comment
       const response = await axios.get(
-        `http://localhost:4000/user-api/articles/${id}`,
+        `${API_BASE_URL}/user-api/articles/${id}`,
         { withCredentials: true }
       );
       setArticle(response.data.payload);

@@ -1,5 +1,6 @@
 import {useEffect,useState} from "react"
 import axios from "axios"
+import { API_BASE_URL } from "../services/api"
 import {
 pageBackground,
 pageWrapper,
@@ -22,7 +23,7 @@ const [articles,setArticles]=useState([])
 const getArticles=async()=>{
 
 const res = await axios.get(
-"http://localhost:4000/user-api/articles",
+`${API_BASE_URL}/user-api/articles`,
 {withCredentials:true}
 )
 

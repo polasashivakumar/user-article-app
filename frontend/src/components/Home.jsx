@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import ArticleCard from "./ArticleCard";
+import { API_BASE_URL } from "../services/api";
 import {
   pageBackground,
   pageWrapper,
@@ -20,7 +21,7 @@ function Home() {
 
   const fetchArticles = async () => {
     try {
-      const res = await axios.get("http://localhost:4000/user-api/articles", {
+      const res = await axios.get(`${API_BASE_URL}/user-api/articles`, {
         withCredentials: true,
       });
       setArticles(res.data.payload);

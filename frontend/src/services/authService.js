@@ -50,6 +50,7 @@
 // src/store/authStore.js
 import { create } from "zustand";
 import axios from "axios";
+import { API_BASE_URL } from "./api";
 
 export const useAuthStore = create((set) => ({
   loading: false,
@@ -61,7 +62,7 @@ export const useAuthStore = create((set) => ({
     set({ loading: true, error: null });
     try {
       const res = await axios.post(
-        "http://localhost:4000/common-api/login",
+        `${API_BASE_URL}/common-api/login`,
         cred,
         { withCredentials: true }
       );
@@ -82,14 +83,14 @@ export const useAuthStore = create((set) => ({
   logout: () => {
     localStorage.removeItem("author");
     set({ isAuthenticated: false, currentUser: null });
-    axios.get("http://localhost:4000/common-api/logout", { withCredentials: true });
+    axios.get(`${API_BASE_URL}/common-api/logout`, { withCredentials: true });
 
   },
   refresh:async()=>{
     set({ loading: true, error: null });
     try {
       const res = await axios.get(
-        "http://localhost:4000/common-api/check-auth",
+        `${API_BASE_URL}/common-api/check-auth`,
         { withCredentials: true }
       );
       localStorage.setItem("author", JSON.stringify(res.data.payload));

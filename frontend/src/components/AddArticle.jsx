@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../services/authService";
+import { API_BASE_URL } from "../services/api";
 import {
   pageBackground,
   pageWrapper,
@@ -35,7 +36,7 @@ function AddArticle() {
     setMsg("");
     try {
       await axios.post(
-        "http://localhost:4000/author-api/articles",
+        `${API_BASE_URL}/author-api/articles`,
         { ...article, author: author._id },
         { withCredentials: true }
       );

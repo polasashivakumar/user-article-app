@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import axios from 'axios';
 import { useAuthStore } from '../services/authService';
+import { API_BASE_URL } from "../services/api";
 import {
   cardClass,
   articleTitle,
@@ -35,7 +36,7 @@ function ArticleCard({ article }) {
         setLoading(true);
         try {
           const response = await axios.get(
-            `http://localhost:4000/user-api/articles/${id}`,
+            `${API_BASE_URL}/user-api/articles/${id}`,
             { withCredentials: true }
           );
           setFetchedArticle(response.data.payload);

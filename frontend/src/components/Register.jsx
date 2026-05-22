@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { API_BASE_URL } from "../services/api";
 import {
   pageBackground,
   pageWrapper,
@@ -25,7 +26,7 @@ function Register() {
     setError("");
     try {
       const url = user.role === "USER" ? "/user-api/users" : "/author-api/users";
-      await axios.post(`http://localhost:4000${url}`, user);
+      await axios.post(`${API_BASE_URL}${url}`, user);
       alert("Registered Successfully!");
       navigate("/login");
     } catch (err) {
