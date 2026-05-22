@@ -3,8 +3,8 @@ import { connect } from "mongoose";
 import { config } from "dotenv";
 import { userRoute } from "./APIs/UserApi.js";
 import cookieParser from "cookie-parser";
-import { adminRoute } from "./APIs/adminApi.js";
-import { authorRoute } from "./APIs/authorApi.js";
+import { adminRoute } from "./APIs/AdminApi.js";
+import { authorRoute } from "./APIs/AuthorApi.js";
 import { commonRouter } from "./APIs/CommonApi.js";
 import cors from "cors";
 
