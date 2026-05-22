@@ -1,0 +1,27 @@
+#### backend development
+
+1. Create git repo
+git init
+
+2. Add gitignore file
+
+3. env for environment variables &
+
+4. generate package.jason
+
+5. create express  app
+
+6. connect to database
+
+7. add middleware (body parser, err handling middleware)
+
+8. Design Schema and create models
+
+9. Design the REST API's for all resoures
+ 
+
+Registrattion & login
+
+10. Registration & Login in common for USER & AUTHOR. Create a seperate service to reuse
+
+11. The Client wont send role. It just redirects to a specific API based on role selection. The hardcoded role assigned by API routes.
