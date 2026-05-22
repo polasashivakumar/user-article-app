@@ -15,16 +15,16 @@ userRoute.post("/users", async (req, res) => {
   res.status(201).json({ message: "user created", payload: newUserObj });
 });
 
-//Read all articles(protected route)
-userRoute.get("/articles", verifyToken("USER"), async (req, res) => {
+//Read all articles(public route)
+userRoute.get("/articles", async (req, res) => {
   //read articles of all authors which are active
   const articles = await ArticleModel.find({ isArticleActive: true });
   //send res
   res.status(200).json({ message: "all articles", payload: articles });
 });
 
-//Read single article(protected route)
-userRoute.get("/articles/:id", verifyToken("USER"), async (req, res) => {
+//Read single article(public route)
+userRoute.get("/articles/:id", async (req, res) => {
   const { id } = req.params;
   //find article by id
   const article = await ArticleModel.findOne({ _id: id, isArticleActive: true }).populate("author", "firstName email");

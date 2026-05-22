@@ -88,6 +88,11 @@ export const useAuthStore = create((set) => ({
   },
   refresh:async()=>{
     set({ loading: true, error: null });
+    const storedAuthor = localStorage.getItem("author");
+    if (!storedAuthor) {
+      set({ loading: false, isAuthenticated: false, currentUser: null });
+      return;
+    }
     try {
       const res = await axios.get(
         `${API_BASE_URL}/common-api/check-auth`,
