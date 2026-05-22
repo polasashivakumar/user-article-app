@@ -21,7 +21,11 @@ app.set("trust proxy", 1);
 // -------------------
 app.use(
   cors({
-    origin: ["http://localhost:5173","https://user-article-app.vercel.app"],
+    origin: [
+      "http://localhost:5173",
+      "https://user-article-app.vercel.app",
+      /^https:\/\/.*\.onrender\.com$/,
+    ],
     credentials: true
   })
 );
