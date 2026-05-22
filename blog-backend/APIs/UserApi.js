@@ -40,9 +40,9 @@ userRoute.get("/articles/:id", async (req, res) => {
 userRoute.put("/articles", verifyToken("USER"), async (req, res) => {
   //get comment obj from req
   const { user, articleId, comment } = req.body;
-  //check user(req.user)
+  //check user(req.user) — token contains _id
   console.log(req.user);
-  if (user !== req.user.userId) {
+  if (user !== req.user._id) {
     return res.status(403).json({ message: "Forbidden" });
   }
   //find artcleby id and update

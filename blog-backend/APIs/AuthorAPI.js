@@ -73,10 +73,9 @@ authorRoute.patch("/articles/:id/status", verifyToken("AUTHOR"), async (req, res
     return res.status(404).json({ message: "Article not found" });
   }
 
-  //console.log(req.user.userId,article.author.toString())
-  // AUTHOR can only modify their own articles
-  if (req.user.role === "AUTHOR" && 
-    article.author.toString() !== req.user.userId) {
+  //console.log(req.user._id, article.author.toString())
+  // AUTHOR can only modify their own articles — token contains _id
+  if (req.user.role === "AUTHOR" && article.author.toString() !== req.user._id) {
     return res
     .status(403)
     .json({ message: "Forbidden. You can only modify your own articles" });
